@@ -1,0 +1,239 @@
+/* ==========================================================================
+   POLAROID GALLERY & SKY LANTERN WISH STYLES
+   ========================================================================== */
+
+.gallery-stage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  z-index: 10;
+  padding: var(--space-md);
+}
+
+/* Polaroid Grid (Bento/Artistic Scatter Layout) */
+.polaroid-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xl);
+  margin: var(--space-xl) 0;
+  width: 100%;
+}
+
+.polaroid-card {
+  background-color: var(--color-paper-bg);
+  padding: var(--space-sm) var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(0, 0, 0, 0.4);
+  width: 220px;
+  cursor: pointer;
+  transition: transform var(--transition-bounce), box-shadow var(--transition-smooth);
+  position: relative;
+}
+
+.polaroid-card:nth-child(odd) {
+  transform: rotate(-3deg);
+}
+
+.polaroid-card:nth-child(even) {
+  transform: rotate(4deg);
+}
+
+.polaroid-card:hover {
+  transform: scale(1.08) rotate(0deg) !important;
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(244, 63, 94, 0.3);
+  z-index: 10;
+}
+
+.polaroid-photo-wrapper {
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #0f172a;
+}
+
+.polaroid-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.polaroid-card:hover .polaroid-photo {
+  transform: scale(1.05);
+}
+
+.polaroid-caption {
+  font-family: var(--font-display);
+  font-size: var(--font-lg);
+  color: var(--color-paper-text);
+  text-align: center;
+  margin-top: var(--space-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.polaroid-pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 30% 30%, var(--color-accent-rose), #9f1239);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  z-index: 5;
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(7, 9, 19, 0.88);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+}
+
+.lightbox-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-card {
+  background-color: var(--color-paper-bg);
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(255, 183, 3, 0.3);
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+.lightbox-card img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.lightbox-caption {
+  font-family: var(--font-display);
+  font-size: var(--font-2xl);
+  color: var(--color-paper-text);
+  margin-top: var(--space-md);
+}
+
+.lightbox-date {
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  color: var(--color-paper-subtext);
+  margin-top: var(--space-2xs);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-rose);
+  color: var(--color-text-primary);
+  border: none;
+  font-size: var(--font-md);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+/* Make a Wish / Sky Lantern Section */
+.wish-section {
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-bg-card-border);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  width: 100%;
+  max-width: 580px;
+  margin-top: var(--space-xl);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.wish-section-title {
+  font-family: var(--font-display);
+  font-size: var(--font-3xl);
+  color: var(--color-text-gold);
+  margin-bottom: var(--space-xs);
+}
+
+.wish-input-group {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.wish-input {
+  flex: 1;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--color-bg-card-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-sm) var(--space-lg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-sm);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.wish-input:focus {
+  border-color: var(--color-accent-gold);
+}
+
+/* Sky Lantern Animation */
+.sky-lantern {
+  position: fixed;
+  bottom: 50px;
+  width: 70px;
+  height: 95px;
+  background: radial-gradient(circle at 50% 60%, #fff 0%, #ffb703 60%, #fb8500 100%);
+  border-radius: 40% 40% 25% 25%;
+  box-shadow: 0 0 30px rgba(255, 183, 3, 0.8), 0 0 60px rgba(251, 133, 0, 0.5);
+  pointer-events: none;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #78350f;
+  font-family: var(--font-display);
+  font-size: var(--font-xs);
+  padding: 4px;
+  text-align: center;
+}
+
+/* Footer / Replay Actions */
+.gallery-footer-actions {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-xl);
+}

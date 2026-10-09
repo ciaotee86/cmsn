@@ -1,0 +1,498 @@
+/* ==========================================================================
+   GRAND THEATER STAGE & ULTRA-SOFT REALISTIC VELVET CURTAINS
+   ========================================================================== */
+
+/* Main Theater Frame Viewport */
+.theater-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: radial-gradient(circle at 50% 35%, #181d36 0%, var(--color-bg-deep) 70%);
+}
+
+/* Ambient Stage Spotlights */
+.theater-spotlight {
+  position: fixed;
+  top: -60px;
+  width: 550px;
+  height: 120vh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 6;
+}
+
+.theater-spotlight.left {
+  left: 5%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(254, 240, 138, 0.28) 0%, rgba(254, 240, 138, 0.08) 45%, transparent 75%);
+  transform: rotate(20deg);
+  transform-origin: top center;
+}
+
+.theater-spotlight.right {
+  right: 5%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(254, 240, 138, 0.28) 0%, rgba(254, 240, 138, 0.08) 45%, transparent 75%);
+  transform: rotate(-20deg);
+  transform-origin: top center;
+}
+
+.theater-spotlight.active {
+  opacity: 0.95;
+}
+
+/* Central Stage Spotlight Pool on Floor */
+.stage-spotlight-pool {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 200px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(254, 240, 138, 0.25) 0%, rgba(251, 191, 36, 0.09) 50%, transparent 75%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.stage-spotlight-pool.active {
+  opacity: 1;
+}
+
+/* Stage Floor (Warm Mahogany with Perspective & Footlights) */
+.stage-floor-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(to top, #140b06 0%, #261309 45%, #3c1e0f 85%, #4a2613 100%);
+  box-shadow: inset 0 20px 40px rgba(0, 0, 0, 0.8), 0 -8px 24px rgba(0, 0, 0, 0.6);
+  border-top: 3px solid var(--color-gold-fringe-shadow);
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* Soft Glowing Footlight Bulbs */
+.stage-footlights-strip {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 var(--space-xl);
+}
+
+.footlight-bulb {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle at 35% 35%, #fff 0%, var(--color-candle-glow) 60%, var(--color-candle-flame) 100%);
+  box-shadow: 0 0 12px var(--color-candle-glow), 0 0 24px var(--color-candle-flame);
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   THE LUXURY SOFT VELVET DRAPERY & PELMET (NO HARSH LINES)
+   ========================================================================== */
+
+/* Top Pelmet / Valance Drape */
+.theater-valance-drape {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  z-index: 40;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Velvet Header Band */
+.valance-header-band {
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--color-velvet-shadow) 0%, var(--color-velvet-deep) 50%, var(--color-velvet-mid) 100%);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+  border-bottom: 2px solid var(--color-gold-fringe);
+  position: relative;
+}
+
+/* Scalloped Swags Row (Continuous Natural Drape) */
+.valance-swags-row {
+  display: flex;
+  width: 100%;
+  height: 90px;
+  margin-top: -8px;
+  position: relative;
+}
+
+.valance-swag-unit {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: visible;
+}
+
+/* Curved Soft Swag Fabric */
+.swag-fabric-curve {
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    var(--color-velvet-highlight) 0%,
+    var(--color-velvet-mid) 45%,
+    var(--color-velvet-deep) 78%,
+    var(--color-velvet-shadow) 100%
+  );
+  box-shadow: inset 0 -8px 16px rgba(0, 0, 0, 0.7), 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-bottom: 3px solid var(--color-gold-fringe);
+  position: relative;
+}
+
+/* Inner Draping Shadows inside Swag */
+.swag-fabric-curve::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10%;
+  width: 80%;
+  height: 70%;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  border-bottom: 2px solid rgba(251, 191, 36, 0.4);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+
+/* Gold Tassel hanging at each swag junction */
+.valance-gold-tassel {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 26px;
+  background: linear-gradient(to bottom, var(--color-gold-fringe) 0%, var(--color-gold-fringe-shadow) 100%);
+  border-radius: 2px 2px 5px 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+  z-index: 42;
+}
+
+.valance-gold-tassel::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-gold-fringe);
+}
+
+/* Left & Right Cascading Side Jabots */
+.valance-side-jabot {
+  position: absolute;
+  top: 0;
+  width: 70px;
+  height: 160px;
+  z-index: 43;
+  pointer-events: none;
+}
+
+.valance-side-jabot.left {
+  left: 0;
+  background: linear-gradient(135deg, var(--color-velvet-mid) 0%, var(--color-velvet-deep) 100%);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  border-left: 2px solid var(--color-gold-fringe);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.valance-side-jabot.right {
+  right: 0;
+  background: linear-gradient(-135deg, var(--color-velvet-mid) 0%, var(--color-velvet-deep) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  border-right: 2px solid var(--color-gold-fringe);
+  box-shadow: -8px 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   THE ULTRA-SOFT VELVET CURTAIN PANELS (ORGANIC BREATHING CLOTH FOLDS)
+   ========================================================================== */
+
+.theater-curtain-panel {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 52%; /* Slight natural center overlap */
+  z-index: 30;
+  cursor: pointer;
+  display: flex;
+  overflow: hidden;
+  will-change: transform;
+  filter: drop-shadow(0 0 35px rgba(0, 0, 0, 0.85));
+}
+
+.theater-curtain-panel.left {
+  left: 0;
+  transform-origin: top left;
+  z-index: 31; /* Overlaps right curtain slightly in center */
+}
+
+.theater-curtain-panel.right {
+  right: 0;
+  transform-origin: top right;
+  z-index: 30;
+  box-shadow: inset 18px 0 35px rgba(0, 0, 0, 0.75);
+}
+
+/* Folds Container holding organic fabric folds */
+.curtain-folds-row {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Individual Organic Velvet Fold */
+.curtain-fold {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    var(--color-velvet-shadow) 0%,
+    var(--color-velvet-deep) 20%,
+    var(--color-velvet-mid) 48%,
+    var(--color-velvet-light) 68%,
+    var(--color-velvet-highlight) 74%,
+    var(--color-velvet-light) 88%,
+    var(--color-velvet-shadow) 100%
+  );
+  box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.4), inset -5px 0 10px rgba(0, 0, 0, 0.5);
+  animation: clothBreathe 5.5s ease-in-out infinite alternate;
+}
+
+/* Staggered breathing wave delays for lifelike cloth movement */
+.curtain-fold:nth-child(1) { animation-delay: 0s; }
+.curtain-fold:nth-child(2) { animation-delay: 0.6s; }
+.curtain-fold:nth-child(3) { animation-delay: 1.2s; }
+.curtain-fold:nth-child(4) { animation-delay: 1.8s; }
+.curtain-fold:nth-child(5) { animation-delay: 2.4s; }
+.curtain-fold:nth-child(6) { animation-delay: 3.0s; }
+.curtain-fold:nth-child(7) { animation-delay: 3.6s; }
+.curtain-fold:nth-child(8) { animation-delay: 4.2s; }
+
+@keyframes clothBreathe {
+  0% {
+    transform: scaleX(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scaleX(1.02) translateX(1px);
+    filter: brightness(1.03);
+  }
+  100% {
+    transform: scaleX(0.99) translateX(-1px);
+    filter: brightness(0.98);
+  }
+}
+
+/* Soft Wavy Bottom Hem with Gold Fringe */
+.curtain-bottom-fringe {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-gold-fringe) 0px,
+    var(--color-gold-fringe) 4px,
+    var(--color-gold-fringe-shadow) 4px,
+    var(--color-gold-fringe-shadow) 8px
+  );
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid var(--color-gold-fringe);
+}
+
+/* Center Overlap Soft Drop Shadow (NO HARSH YELLOW STRIPE!) */
+.curtain-center-shadow {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 25px;
+  pointer-events: none;
+}
+
+.theater-curtain-panel.left .curtain-center-shadow {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  border-right: 1px solid rgba(251, 191, 36, 0.35); /* Subtle gentle gold shimmer */
+}
+
+/* Gold Tiebacks on Sides when gathered */
+.theater-tieback-cord {
+  position: fixed;
+  top: 48%;
+  width: 52px;
+  height: 110px;
+  z-index: 35;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.theater-tieback-cord.left {
+  left: 20px;
+}
+
+.theater-tieback-cord.right {
+  right: 20px;
+}
+
+.theater-tieback-cord.active {
+  opacity: 1;
+}
+
+.tieback-gold-rope {
+  width: 100%;
+  height: 16px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-gold-fringe) 0px,
+    var(--color-gold-fringe) 6px,
+    var(--color-gold-fringe-shadow) 6px,
+    var(--color-gold-fringe-shadow) 12px
+  );
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.tieback-gold-tassel {
+  width: 22px;
+  height: 65px;
+  margin: 6px auto 0;
+  background: linear-gradient(to bottom, var(--color-gold-fringe) 0%, var(--color-gold-fringe-shadow) 100%);
+  border-radius: 4px 4px var(--radius-sm) var(--radius-sm);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   STAGE CONTENT ARENA (PERMANENT STAGE - SCENES MOUNT HERE)
+   ========================================================================== */
+
+.stage-arena {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 125px min(85px, 7vw) 140px min(85px, 7vw);
+  box-sizing: border-box;
+}
+
+/* The Welcome Poster Card on closed curtain */
+.stage-poster-card {
+  position: relative;
+  z-index: 38;
+  max-width: 560px;
+  width: 90%;
+  padding: var(--space-xl) var(--space-2xl);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(16px);
+  border: 2px solid var(--color-gold-fringe);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(251, 191, 36, 0.35);
+  text-align: center;
+  transition: transform var(--transition-bounce), opacity var(--transition-smooth);
+}
+
+.stage-poster-card:hover {
+  transform: scale(1.02);
+}
+
+.theater-badge {
+  display: inline-block;
+  padding: var(--space-2xs) var(--space-md);
+  background-color: var(--color-velvet-deep);
+  border: 1px solid var(--color-gold-fringe);
+  border-radius: var(--radius-full);
+  color: var(--color-gold-fringe);
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.theater-hint {
+  font-family: var(--font-body);
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xl);
+}
+
+.btn-open-curtain {
+  font-family: var(--font-body);
+  font-size: var(--font-md);
+  font-weight: var(--weight-bold);
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-velvet-mid), var(--color-velvet-light));
+  border: 2px solid var(--color-gold-fringe);
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg), 0 0 25px rgba(56, 189, 248, 0.4);
+  transition: transform var(--transition-bounce), box-shadow var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.btn-open-curtain:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(251, 191, 36, 0.6);
+}
+
+.btn-open-curtain:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .theater-valance-drape {
+    height: 95px;
+  }
+  .valance-header-band {
+    height: 24px;
+  }
+  .valance-swags-row {
+    height: 70px;
+  }
+  .stage-floor-wrapper {
+    height: 85px;
+  }
+  .stage-arena {
+    padding: 105px var(--space-sm) 110px;
+  }
+  .stage-poster-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+}

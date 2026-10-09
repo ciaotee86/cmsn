@@ -1,0 +1,268 @@
+/* ==========================================================================
+   3D ENVELOPE & TYPEWRITER LETTER STYLES
+   ========================================================================== */
+
+.letter-stage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 680px;
+  position: relative;
+  z-index: 10;
+  padding: var(--space-md);
+}
+
+/* 3D Envelope Box */
+.envelope-scene {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  perspective: 1000px;
+  cursor: pointer;
+  margin: var(--space-lg) auto;
+  transition: transform var(--transition-bounce);
+}
+
+.envelope-scene:hover {
+  transform: scale(1.03);
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #e2d9cc;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Envelope Flap (Nắp thư lật 3D) */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 120px solid #d4c7b5;
+  transform-origin: top center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 4;
+}
+
+/* Wax Seal (Con dấu sáp đỏ) */
+.wax-seal {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle at 30% 30%, #f43f5e, #9f1239);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  z-index: 5;
+  color: var(--color-paper-bg);
+  font-size: var(--font-lg);
+  transition: transform var(--transition-fast), opacity var(--transition-smooth);
+}
+
+.wax-seal:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Envelope Pockets (2 cánh và đáy) */
+.envelope-pocket-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 220px solid #c9bba7;
+  border-right: 160px solid transparent;
+  z-index: 3;
+}
+
+.envelope-pocket-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 220px solid #c9bba7;
+  border-left: 160px solid transparent;
+  z-index: 3;
+}
+
+.envelope-pocket-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-bottom: 125px solid #bdad97;
+  z-index: 3;
+}
+
+/* Open State */
+.envelope-wrapper.opened .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-wrapper.opened .wax-seal {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Parchment Letter Paper (Hiển thị sau khi mở thư) */
+.letter-paper-modal {
+  display: none;
+  background-color: var(--color-paper-bg);
+  color: var(--color-paper-text);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl) var(--space-2xl);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-paper-line);
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: var(--space-md) auto;
+  text-align: left;
+}
+
+.letter-paper-modal.active {
+  display: block;
+}
+
+.letter-decor-border {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px dashed var(--color-paper-line);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+.letter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-paper-line);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.letter-title {
+  font-family: var(--font-display);
+  font-size: var(--font-2xl);
+  color: var(--color-accent-rose);
+}
+
+.letter-date {
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  color: var(--color-paper-subtext);
+}
+
+.letter-salutation {
+  font-family: var(--font-display);
+  font-size: var(--font-xl);
+  margin-bottom: var(--space-md);
+  color: var(--color-paper-text);
+}
+
+.letter-body {
+  font-family: var(--font-body);
+  font-size: var(--font-md);
+  line-height: var(--line-relaxed);
+  color: var(--color-paper-text);
+  min-height: 180px;
+}
+
+.letter-paragraph {
+  margin-bottom: var(--space-md);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 18px;
+  background-color: var(--color-accent-rose);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.letter-signature-box {
+  margin-top: var(--space-xl);
+  text-align: right;
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+}
+
+.letter-closing {
+  font-family: var(--font-body);
+  font-size: var(--font-sm);
+  color: var(--color-paper-subtext);
+}
+
+.letter-signature {
+  font-family: var(--font-display);
+  font-size: var(--font-2xl);
+  color: var(--color-accent-rose);
+  margin-top: var(--space-2xs);
+}
+
+.letter-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+  .envelope-scene {
+    width: 280px;
+    height: 190px;
+  }
+  .envelope-flap {
+    border-left-width: 140px;
+    border-right-width: 140px;
+    border-top-width: 105px;
+  }
+  .envelope-pocket-left {
+    border-bottom-width: 190px;
+    border-right-width: 140px;
+  }
+  .envelope-pocket-right {
+    border-bottom-width: 190px;
+    border-left-width: 140px;
+  }
+  .envelope-pocket-bottom {
+    border-left-width: 140px;
+    border-right-width: 140px;
+    border-bottom-width: 105px;
+  }
+  .wax-seal {
+    top: 80px;
+  }
+  .letter-paper-modal {
+    padding: var(--space-lg) var(--space-md);
+  }
+}

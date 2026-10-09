@@ -1,0 +1,366 @@
+/* ==========================================================================
+   SPLIT STAGE: LETTER ON LEFT & HANGING PHOTOS ON RIGHT (NO OVERFLOW)
+   ========================================================================= */
+
+.split-screen-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* Two distinct, well-separated columns on the stage */
+.split-stage-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 48px; /* Tách 2 khối ra xa nhau, không để quá sát nhau */
+  width: 100%;
+  position: relative;
+  z-index: 20;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: VINTAGE HANDWRITTEN LETTER (FULL REVEAL ANIMATION)
+   ========================================================================== */
+
+.split-letter-column {
+  flex: 1;
+  max-width: 470px;
+  min-width: 0;
+  width: 100%;
+}
+
+.vintage-letter-card {
+  background-color: var(--color-paper-bg);
+  color: var(--color-paper-text);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-paper-line);
+  position: relative;
+  text-align: left;
+}
+
+.letter-dashed-border {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px dashed var(--color-paper-line);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+.letter-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-paper-line);
+  padding-bottom: var(--space-2xs);
+  margin-bottom: var(--space-2xs);
+}
+
+.letter-title-text {
+  font-family: var(--font-display);
+  font-size: var(--font-xl);
+  color: var(--color-accent-rose);
+  font-weight: var(--weight-bold);
+}
+
+.letter-date-text {
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  color: var(--color-paper-subtext);
+}
+
+.letter-salutation-text {
+  font-family: var(--font-display);
+  font-size: var(--font-lg);
+  color: var(--color-paper-text);
+  margin-bottom: var(--space-2xs);
+  font-weight: var(--weight-semibold);
+}
+
+.letter-body-prose {
+  font-family: var(--font-body);
+  font-size: var(--font-sm);
+  line-height: 1.6;
+  color: var(--color-paper-text);
+}
+
+.letter-paragraph-item {
+  margin-bottom: var(--space-xs);
+  will-change: transform, opacity;
+}
+
+.letter-bottom-signature {
+  margin-top: var(--space-sm);
+  text-align: right;
+  will-change: transform, opacity;
+}
+
+.letter-closing-text {
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  color: var(--color-paper-subtext);
+}
+
+.letter-sign-name {
+  font-family: var(--font-display);
+  font-size: var(--font-xl);
+  color: var(--color-accent-rose);
+  margin-top: 1px;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: HANGING CLOTHESLINE PHOTOS (2x2 GRID)
+   ========================================================================== */
+
+.split-photos-column {
+  flex: 1;
+  max-width: 450px;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hanging-gallery-wrapper {
+  width: 100%;
+  position: relative;
+  padding-top: var(--space-xs);
+}
+
+/* The Fairy Light Rope String */
+.hanging-rope-line {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, #b45309 15%, var(--color-gold-fringe) 50%, #b45309 85%, transparent 100%);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+  margin-bottom: var(--space-2xs);
+}
+
+/* Glowing Fairy Light Dots along the Rope */
+.fairy-dots-container {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+}
+
+.fairy-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: #fef08a;
+  box-shadow: 0 0 8px #fde047, 0 0 14px #f59e0b;
+}
+
+/* Hanging Polaroids 2x2 Grid */
+.hanging-polaroids-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  width: 100%;
+  justify-items: center;
+  padding-top: 2px;
+}
+
+/* Individual Hanging Polaroid Card */
+.hanging-polaroid-item {
+  position: relative;
+  background-color: var(--color-paper-bg);
+  padding: 6px 6px var(--space-xs);
+  border-radius: 4px;
+  box-shadow: var(--shadow-md), 0 0 16px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 195px;
+  cursor: pointer;
+  transform-origin: top center;
+  transition: transform var(--transition-bounce), box-shadow var(--transition-smooth);
+}
+
+/* Alternating gentle sway animations */
+.hanging-polaroid-item.sway-1 {
+  animation: swayPendulum 5s infinite ease-in-out alternate;
+}
+.hanging-polaroid-item.sway-2 {
+  animation: swayPendulum 6s infinite ease-in-out alternate-reverse;
+}
+.hanging-polaroid-item.sway-3 {
+  animation: swayPendulum 4.5s infinite ease-in-out alternate;
+}
+.hanging-polaroid-item.sway-4 {
+  animation: swayPendulum 5.5s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes swayPendulum {
+  0% { transform: rotate(-2.5deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(-2deg); }
+}
+
+.hanging-polaroid-item:hover {
+  animation-play-state: paused;
+  transform: scale(1.06) rotate(0deg) !important;
+  box-shadow: var(--shadow-lg), 0 0 25px rgba(244, 63, 94, 0.4);
+  z-index: 15;
+}
+
+/* Realistic Wooden Clothespin */
+.wooden-clothespin {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 20px;
+  background: linear-gradient(to right, #92400e 0%, #d97706 40%, #b45309 80%, #78350f 100%);
+  border-radius: 2px 2px 1px 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+  z-index: 6;
+}
+
+.wooden-clothespin::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #475569;
+}
+
+/* Photo Thumbnail inside Polaroid */
+.hanging-photo-box {
+  width: 100%;
+  height: 125px;
+  overflow: hidden;
+  border-radius: 3px;
+  background-color: #0f172a;
+}
+
+.hanging-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.hanging-polaroid-item:hover .hanging-photo-img {
+  transform: scale(1.06);
+}
+
+.hanging-photo-caption {
+  font-family: var(--font-display);
+  font-size: var(--font-sm);
+  color: var(--color-paper-text);
+  text-align: center;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   COMPACT STAGE FOOTER: SLIM WISH PILL & BUTTONS ON SAME LINE
+   ========================================================================== */
+
+.compact-stage-footer {
+  width: 100%;
+  max-width: 920px;
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  z-index: 20;
+}
+
+.slim-wish-form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid var(--color-bg-card-border);
+  backdrop-filter: blur(12px);
+  padding: 4px 6px 4px var(--space-sm);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(251, 191, 36, 0.15);
+  flex: 1;
+  max-width: 480px;
+}
+
+.slim-wish-icon {
+  font-size: var(--font-lg);
+  line-height: 1;
+}
+
+.slim-wish-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-sm);
+  padding: 4px var(--space-xs);
+  min-width: 120px;
+}
+
+.slim-wish-input::placeholder {
+  color: var(--color-text-muted);
+  font-size: var(--font-xs);
+}
+
+.slim-wish-btn {
+  padding: 6px var(--space-md) !important;
+  font-size: var(--font-xs) !important;
+  border-radius: var(--radius-full) !important;
+  white-space: nowrap;
+}
+
+.slim-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.slim-btn {
+  padding: 7px var(--space-md) !important;
+  font-size: var(--font-xs) !important;
+  border-radius: var(--radius-full) !important;
+  white-space: nowrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 860px) {
+  .split-stage-container {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .split-letter-column, .split-photos-column {
+    max-width: 100%;
+  }
+  .compact-stage-footer {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .slim-wish-form {
+    width: 100%;
+    max-width: 100%;
+  }
+}
